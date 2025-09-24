@@ -1,0 +1,46 @@
+<template>
+    <div class="container">
+        <template if:true={leadInfo.logo}>
+            <div class="logo-card">
+                <img src={leadInfo.logo} alt="Company logo" class="company-logo" onerror={handleLogoError}/>
+            </div>
+        </template>
+
+        <lightning-card icon-name="standard:company">
+            <h2 class="title">LEAD COMPANY SUMMARY</h2>
+            <div class="slds-m-around_medium"> 
+                <template if:true={loading}>
+                    <div class="slds-align_absolute-center">
+                        <lightning-spinner alternative-text="Loading"></lightning-spinner>
+                    </div>
+                </template>
+
+                <template if:true={error}>
+                    <div class="slds-notice slds-notice_alert slds-theme_alert-texture">
+                        <div class="slds-notice__content">
+                            <h2 class="slds-text-heading_small">Error</h2>
+                            <p>{error}</p>
+                        </div>
+                    </div>
+                </template>
+
+                <template if:true={leadInfo.company}>
+                    <div class="grid-container">
+                        <div class="column">
+                            <dl class="info-list">
+                                <dt>Company:</dt><dd>{leadInfo.company}</dd>
+                                <dt>Country:</dt><dd>{leadInfo.country}</dd>
+                                <dt>City:</dt><dd>{leadInfo.city}</dd>
+                                <dt>Industry:</dt><dd>{leadInfo.industry}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </template>
+
+                <template if:false={leadInfo.company}>
+                    <p>No Lead info available.</p>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>
